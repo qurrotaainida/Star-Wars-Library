@@ -1,9 +1,17 @@
-import React from 'react';
+import React from 'react'
+import MovieCard from './MovieCard'
+import style from './result.module.css'
 
 const Result = () => {
-    return (
-        <div>Result</div>
-    );
-};
+  return (
+    <div className={style.result_container}>
+      <MovieCard/>
+      <MovieCard/>
+      <MovieCard/>
+      <MovieCard/>
+      <MovieCard/>
+    </div>
+  )
+}
 
-export default Result;
+export default Result

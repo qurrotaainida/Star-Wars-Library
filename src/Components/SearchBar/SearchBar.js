@@ -54,7 +54,34 @@ const SearchBar = (props) => {
             return response.json()
         })
         .then( data => {
-            props.setMovieList([...data.results])
+            props.setMovieList([...data.results.filter( (item) => {
+                let hasCharacter, hasPlanet, hasSpecies, releaseAfter
+                if ( formData.character ) {
+                    hasCharacter = item.characters.includes(formData.character)
+                } else {
+                    hasCharacter = true
+                }
+
+                if ( formData.planet ) {
+                    hasPlanet = item.planets.includes(formData.planet)
+                } else {
+                    hasPlanet = true
+                }
+
+                if ( formData.species ) {
+                    hasSpecies = item.species.includes(formData.species)
+                } else {
+                    hasSpecies = true
+                }
+
+                if ( formData.release_date ) {
+                    releaseAfter = new Date(item.release_date) >= new Date(formData.release_date)
+                } else {
+                    releaseAfter = true
+                }
+
+                return ( hasCharacter && hasPlanet && hasSpecies && releaseAfter )
+            })])
         })
     }
 
@@ -68,7 +95,7 @@ const SearchBar = (props) => {
                             <option value="">-- Select Character --</option>
                             {characterOptions.map((item, index) => {
                                 return (
-                                    <option value={item.name} key={index}>
+                                    <option value={item.url} key={index}>
                                         {item.name}
                                     </option>
                                 )
@@ -81,7 +108,7 @@ const SearchBar = (props) => {
                             <option value="">-- Select Planet --</option>
                             {planetOptions.map((item, index) => {
                                 return (
-                                    <option value={item.name} key={index}>
+                                    <option value={item.url} key={index}>
                                         {item.name}
                                     </option>
                                 )
@@ -94,7 +121,7 @@ const SearchBar = (props) => {
                             <option value="">-- Select Species --</option>
                             {speciesOptions.map((item, index) => {
                                 return (
-                                    <option value={item.name} key={index}>
+                                    <option value={item.url} key={index}>
                                         {item.name}
                                     </option>
                                 )

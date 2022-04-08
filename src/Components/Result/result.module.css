@@ -5,10 +5,17 @@
     margin-right: auto;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    text-decoration: none!important;
+    color: whitesmoke;
 }
 
 .movie_card {
     border: 2px solid #ffffff;
     padding: 8px;
     border-radius: 8px;
-} 
+}
+
+.movie_card:hover {
+    background: #2b2b2b;
+    color: #ffe81f;
+}
